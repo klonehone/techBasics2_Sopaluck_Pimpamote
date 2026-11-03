@@ -366,8 +366,87 @@ void loop() {
 }
 
 ```
-The boards: 
-<img width="300" src="https://github.com/user-attachments/assets/c4f1b80a-ecdf-440f-a383-ef8d0d648533" />
+The board for this code (photo) is coming. 
+
+Button code:
+
+```
+const int buttonPin = 2;
+int state = 0;
+
+void setup() {
+  // put your setup code here, to run once:
+  pinMode (buttonPin, INPUT);
+  Serial.begin(9600);
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  state = digitalRead(buttonPin);
+  Serial.print("Button");
+  Serial.println(state);
+
+```
+
+challenge code: 
 
 
+```
+
+const int buttonPin = 2;
+const int buttonPin2 = 3;
+const int buttonPin3 = 4;
+const int buzzerPin  = 8;
+
+int state = 0;
+int state2 = 0;
+int state3 = 0;
+
+
+void setup() {
+  // put your setup code here, to run once:
+  pinMode (buttonPin, INPUT_PULLUP);
+  pinMode (buttonPin2, INPUT_PULLUP);
+  pinMode (buttonPin3, INPUT_PULLUP);
+  pinMode (buzzerPin, OUTPUT);
+  Serial.begin(9600);
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  state = digitalRead(buttonPin);
+  state2 = digitalRead(buttonPin2);
+  state3 = digitalRead(buttonPin3);
+
+  if (state == 1 && state2 == 1 && state3 == 1){ // in c we write && for and, II for or
+  noTone (buzzerPin);
+  }
+
+  if(state == 0) { // never used single equal in conditional statements
+    tone(buzzerPin, 200);
+  }
+  if(state2 == 0) { // never used single equal in conditional statements
+    tone(buzzerPin, 400);
+  }
+  if(state3 == 0) { // never used single equal in conditional statements
+    tone(buzzerPin, 500);
+  }
+
+  Serial.print("Button:");
+  Serial.print(state);
+  Serial.print(" ");
+  Serial.print(state2);
+  Serial.print(" ");
+  Serial.print(state3);
+  Serial.println(" ");
+
+  delay (100);
+  }
+
+
+  ```
+
+  The board for this code (photo) is coming. 
 
