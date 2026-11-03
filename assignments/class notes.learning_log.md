@@ -253,3 +253,117 @@ void loop() {
 We also went through coding elements of int - start, end, step - and also if/else condition in Arduino code, as you can see in the code (new for this session). 
 
 
+## Notes and Learning Log: Week 3 - 03/11/26
+
+We got introduced to Buzzers and differentiating passive and active buzzers:
+Active Buzzer: it can produce sound directly when
+connected to power (built in oscillator, defined pitch)
+Passive Buzzer: it requires a signal in order to make sound
+
+Soundwaves: easiest soundwave to see is pulse. 
+
+Usage of PWN and GND can cause problems for interpretation
+We connect a passive buzzer to the Arduino and breadboard - generates a square wave of the specified frequency (non-blocking function):
+
+```
+const int buzzerPin = 8;
+
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(buzzerPin, OUTPUT);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  tone(buzzerPin, 200, 1000);
+  delay(2000);
+}
+```
+
+With serial read (also different pitches): 
+
+```
+const int buzzerPin = 8;
+int reading = 0;
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  pinMode(buzzerPin, OUTPUT);
+  delay (1000);
+  Serial.println("Type the pitch you want to hear!");
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  if (Serial.available() > 0) {
+    reading = Serial.parseInt();
+    Serial.println(reading);
+    tone (buzzerPin, reading, 500);
+    }
+}
+```
+
+We the moved on to ultrasonic distance sensor, connected it to the buzzzer and got it woirking with the following code: 
+
+```
+/***
+Ultrasonic distance sensor
+***/
+
+// Define the Trig and Echo pin connections
+const int trigPin = 9;
+const int echoPin = 10;
+const int buzzerPin = 8;
+
+// Define variables to store duration and distance
+long duration; // for potentially large number
+int distance;
+
+void setup() {
+  // Start the serial communication
+  Serial.begin(9600);
+
+  // Define the Trig and Echo pins as Output and Input
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  pinMode (buzzerPin, OUTPUT);
+}
+
+void loop() {
+  // Clear the trigPin
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+
+  // Sets the trigPin HIGH for 10 microseconds
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+
+  // Reads the echoPin, returns the sound wave travel time in microseconds
+  duration = pulseIn(echoPin, HIGH);
+
+  Serial.print("Duration ");
+  Serial.print(duration);
+  Serial.print(" microseconds | ");
+
+  // Calculating the distance
+  distance = duration * 0.034 / 2; // Speed of sound wave divided by 2 (go and back)
+
+  if (distance < 30) {
+    digitalWrite(buzzerPin, HIGH);
+  } else {
+    digitalWrite(buzzerPin, LOW);
+  }
+
+  // Displays the distance on the Serial Monitor
+  Serial.print("Distance: ");
+  Serial.print(distance);
+  Serial.println(" cm");
+
+  // Delay 500 milliseconds before next measurement
+  delay(500);
+}
+
+```
+
