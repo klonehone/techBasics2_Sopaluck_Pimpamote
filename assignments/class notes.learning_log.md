@@ -366,4 +366,8 @@ void loop() {
 }
 
 ```
+The boards: 
+<img width="300" src="https://github.com/user-attachments/assets/c4f1b80a-ecdf-440f-a383-ef8d0d648533" />
+
+
 
