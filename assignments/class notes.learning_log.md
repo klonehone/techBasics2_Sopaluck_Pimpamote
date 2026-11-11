@@ -462,3 +462,5 @@ important when working with multiple servos
 similar to pinMode
 
 Exercise with controlling a servo with a potentionmeter
+
+I had to leave after break, so didnt participate in the latter half of the class. 
