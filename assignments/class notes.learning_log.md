@@ -366,7 +366,6 @@ void loop() {
 }
 
 ```
-The board for this code (photo) is coming. 
 
 Button code:
 
@@ -448,5 +447,18 @@ void loop() {
 
   ```
 
-  The board for this code (photo) is coming. 
 
+# Notes and Learning Log: Week 1 - 10/11/2026
+
+We were today introduced to the servo motor plus the belonging parts: 
+Potentimeter inside, servo horn, gear train, dc motor and control unit
+
+We also learned about positional (signal) and continuous (speed) servo, one with 180 angle, the other 360
+
+There is a Servo info on the official Arduino library
+
+declaring servo - object
+important when working with multiple servos
+similar to pinMode
+
+Exercise with controlling a servo with a potentionmeter
