@@ -253,7 +253,7 @@ void loop() {
 We also went through coding elements of int - start, end, step - and also if/else condition in Arduino code, as you can see in the code (new for this session). 
 
 
-## Notes and Learning Log: Week 3 - 03/11/26
+## Notes and Learning Log: Week 4 - 03/11/26
 
 We got introduced to Buzzers and differentiating passive and active buzzers:
 Active Buzzer: it can produce sound directly when
@@ -448,7 +448,7 @@ void loop() {
   ```
 
 
-# Notes and Learning Log: Week 1 - 10/11/2026
+# Notes and Learning Log: Week 5 - 10/11/2026
 
 We were today introduced to the servo motor plus the belonging parts: 
 Potentimeter inside, servo horn, gear train, dc motor and control unit
@@ -463,4 +463,77 @@ similar to pinMode
 
 Exercise with controlling a servo with a potentionmeter
 
-I had to leave after break, so didnt participate in the latter half of the class. 
+I had to leave after break, so didnt participate in the latter half of the class, attempted the joystick.
+I tinely attempted this at home, but 
+
+
+
+# Notes and Learning Log: Week 6 - 17/11/2026
+Stepper Motor
+
+precise control of positions with a large torque at low speed
+Allows for fine movements
+
+2nd type of motor because it is tricky to work with them, need to know its parameters in order to work with them properly.
+Trickier to use, especially not being the sourcer. Matching driver and different stepper have different specs --> different code
+
+Green plate - motor driver
+Same code can be used, but you can change motor for stronger - for stepper motor, you'd need to change specs and driver
+This specific driver is meant for this motor in this kit. 
+
+Arduino has limited power supply, for testing. In general, motor should be powered seperately
+On battery - save energy
+
+The code for full rotation rotating motor: 
+ 
+```
+/***
+Example Code to make a stepper motor step
+***/
+
+// We are using the CheapStepper library
+#include <CheapStepper.h>
+
+// Connect pins 8,9,10,11 to IN1,IN2,IN3,IN4 on ULN2003 board
+CheapStepper stepper (8,9,10,11); 
+
+
+const int stepsPerRevolution = 4096;
+
+// This number defines how many steps are needed per one revolution (round)
+// by default the value is 4096, the stepper motor in Miuzei(from the library) needs 1024.
+// If your motor is only turning 90 degree instead of the full round
+// you need to change this value to 4096
+
+bool moveClockwise = true;
+void setup() {
+  
+  stepper.setRpm(6);  // the default is ~16.25rpm
+  // we set to 10 for safe, high torque movement
+  // -> 10 rounds per minute
+  // Range: 6RPM - 14RPM when powered from Arduino
+  //        2RPM - 24RPM when powered from other resources
+  stepper.setTotalSteps(stepsPerRevolution); 
+  Serial.begin(9600);
+}
+
+void loop() {
+  // let's move a full rotation (1024 mini-steps)
+  // we'll go step-by-step using the step() function this time
+  for (int s=0; s<stepsPerRevolution; s++){
+     // // let's move one "step"
+    stepper.step(moveClockwise);
+    int nStep = stepper.getStep();
+    // and if it's divisible by 64...
+    if (nStep%64==0){ 
+      // let's print the position to the console
+      Serial.print("current step position: "); 
+      Serial.print(nStep);
+      Serial.println();
+    }
+  }
+  delay(1000);
+}
+
+´´´
+
