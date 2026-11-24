@@ -682,6 +682,30 @@ void loop() {
 }
 ´´´
 ```
+code for spinning with potentiometer:
+
+```
+const int motor = 3;
+const int pot = A0;
+int potValue = 0;
+int speed = 0;
+int reading = 0;
+
+void setup() {
+  pinMode(pot, INPUT);
+  Serial.begin(9600);
+  pinMode (motor, OUTPUT);
+}
+
+void loop() {
+  reading = analogRead(pot);
+  Serial.print("Potentiometer: ");
+  speed = map(reading, 0, 1023, 0, 255);
+  Serial.println(reading);
+  analogWrite (motor, speed);
+}
+´´´
+```
 
 
 
