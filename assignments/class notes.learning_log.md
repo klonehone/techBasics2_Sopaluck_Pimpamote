@@ -638,4 +638,51 @@ void loop() {
 }
 
 ´´´
+```
+# Notes and Learning Log: Week 7 - 24/11/2026
+
+DC motors, brushed and brushless, the latter more expensive
+Gear motos, they are slower but more powerful
+
+
+Diode - from working with LEDs
+flows allows for current in one direction
+Direction is important and points where the current goes
+
+transistor - semicomductor - flat side facing you is the right side - C; B; E from left to right
+Middle leg is for the signal(pin)
+Used to switch or amplify electrical power
+
+Transistor
+Collector (C) collects the majority of the charge carriers
+that are emitted from the emitter.
+Base (B)This is the control terminal. A small current or
+voltage at the base can control a larger current flow
+between the collector and emitter.
+Emitter (E) emits the charge carriers (electrons in an NPN
+transistor) into the base
+Used in vacuum tubes e.g.
+
+
+code for spinning:
+
+```
+const int motor = 3;
+
+void setup() {
+  // put your setup code here, to run once:
+  pinMode (motor, OUTPUT);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  digitalWrite (motor, 255);
+  delay (100);
+  digitalWrite (motor, 128);
+}
+´´´
+```
+
+
+
 
